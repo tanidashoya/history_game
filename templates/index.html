@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界史4択クイズ</title>
+</head>
+<body>
+    <h1>世界史4択クイズ</h1>
+    <p class="quiz-content">
+        第{{round_count}}問：{{quiz}}    
+    </p>
+    {% for key,choice in choices.items() %}
+    <ul>
+        <li>{{key}}：{{choice}}</li>
+    </ul>
+    {% endfor %}
+    <form method="POST">
+        <button type="submit" name="user_input" value="A">A</button>
+        <button type="submit" name="user_input" value="B">B</button>
+        <button type="submit" name="user_input" value="C">C</button>
+        <button type="submit" name="user_input" value="D">D</button>
+    </form>
+
+</body>
+</html>

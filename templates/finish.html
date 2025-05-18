@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>答え合わせ</title>
+</head>
+<body>
+<!-- resultは問題や解答の辞書、ユーザーの入力、問題番号が入ったリスト：[ [{},user_input,1], [{},user_input,2], ・・・] -->
+    <h1>答え合わせ</h1>
+    <ul>
+        {% for res in result %}
+            <li>第{{res[2]}}問</li>
+            <li>{{res[0]["quiz"]}}</li>
+            {% for key,choice in res[0]["choices"].items() %}
+                <li>{{key}}：{{choice}}</li>
+            {% endfor %}
+            <li>正解：{{res[0]["answer"]}}</li>
+            <li>あなたの解答：{{res[1]}}</li>
+            {% if res[0]["answer"] == res[1] %}
+                <p>正解</p>
+            {% else %}
+                <p>不正解</p>
+            {% endif %}
+        {% endfor %}
+    </ul> 
+    <p>{{correct_count}}</p>
+
+</body>
+</html>
+
+
