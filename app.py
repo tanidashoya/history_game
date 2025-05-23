@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for,request,session,redirect
-from random import random,choice
+from random import choice
 from quiz_dict_list_data import quiz_dict_list
 
 app = Flask(__name__)
