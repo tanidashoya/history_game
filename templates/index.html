@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>世界史4択クイズ</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>世界史4択クイズ</h1>
-    <p class="quiz-content">
-        第{{round_count}}問：{{quiz}}    
-    </p>
-    {% for key,choice in choices.items() %}
-    <ul>
-        <li>{{key}}：{{choice}}</li>
-    </ul>
-    {% endfor %}
-    <form method="POST">
-        <button type="submit" name="user_input" value="A">A</button>
-        <button type="submit" name="user_input" value="B">B</button>
-        <button type="submit" name="user_input" value="C">C</button>
-        <button type="submit" name="user_input" value="D">D</button>
-    </form>
-
+    <header>
+        <h1>世界史4択クイズ</h1>
+    </header>
+    <main>
+        <div class="quiz">
+            <p class="quiz-content">
+                第{{round_count}}問：{{quiz}}    
+            </p>
+            {% for key,choice in choices.items() %}
+            <ul>
+                <li>{{key}}：{{choice}}</li>
+            </ul>
+            {% endfor %}
+        </div>
+        <form method="POST">
+            <div class="choices">
+                <button type="submit" name="user_input" value="A" class="btn btn-a">A</button>
+                <button type="submit" name="user_input" value="B" class="btn btn-b">B</button>
+                <button type="submit" name="user_input" value="C" class="btn btn-c">C</button>
+                <button type="submit" name="user_input" value="D" class="btn btn-d">D</button>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

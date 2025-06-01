@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>答え合わせ</title>
+    <title>世界史4択クイズ【答え合わせ」</title>
+    <link rel="stylesheet" href="../static/finish.css">
 </head>
 <body>
 <!-- resultは問題や解答の辞書、ユーザーの入力、問題番号が入ったリスト：[ [{},user_input,1], [{},user_input,2], ・・・] -->
-    <h1>答え合わせ</h1>
-    <ul>
-        {% for res in result %}
-            <li>第{{res[2]}}問</li>
-            <li>{{res[0]["quiz"]}}</li>
-            {% for key,choice in res[0]["choices"].items() %}
-                <li>{{key}}：{{choice}}</li>
-            {% endfor %}
-            <li>正解：{{res[0]["answer"]}}</li>
-            <li>あなたの解答：{{res[1]}}</li>
-            {% if res[0]["answer"] == res[1] %}
-                <p>正解</p>
-            {% else %}
-                <p>不正解</p>
-            {% endif %}
-        {% endfor %}
-    </ul> 
-    <p>{{correct_count}}</p>
-
+    <header>
+        <h1>答え合わせ</h1>
+    </header>
+    <main>
+        <div class="total-result">
+            <ul>
+                {% for res in result %}
+                <div class="result">
+                    <li class="quiz">第{{res[2]}}問：{{res[0]["quiz"]}}</li>
+                    {% for key,choice in res[0]["choices"].items() %}
+                        <li class="choices">{{key}}：{{choice}}</li>
+                    {% endfor %}
+                    <li class="kaitou">正解：{{res[0]["answer"]}}</li>
+                    <li>あなたの解答：{{res[1]}}</li>
+                    {% if res[0]["answer"] == res[1] %}
+                        <p class="res correct">正解</p>
+                    {% else %}
+                        <p class="res">不正解</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="correct_count">
+            <!-- Jinjaではpythonの関数をそのまま使えないのでパイプライン（｜）をつかって値に変化を加える -->
+            <p>正解数：{{correct_count}}問 / 全{{result|length}}問中</p>
+        </div>
+        <!-- 誤答説明用ページに遷移するボタンを作成する -->
+        <div class="explanation-btn">
+            <a href="{{ url_for('explanation') }}">誤答の解説を見る</a>
+        </div>
+    </main>
 </body>
 </html>
 

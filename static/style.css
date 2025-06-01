@@ -1,0 +1,65 @@
+@import url('destyle.css');
+
+
+
+header {
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Noto Serif JP', serif;
+    color: #392421;             /* ダークブラウン（知性・歴史感） */
+    background-color: #e2ddca;  /* パーチメントベージュ（古文書風） */
+}
+
+.quiz {
+    background-color: #f2f2f2;
+    margin: 15px 6px;
+    border-radius: 6px;
+    padding:15px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-content {
+    text-decoration: underline;
+    margin-bottom: 12px;
+}
+
+li {
+    margin-bottom: 9px;
+}
+
+.choices {
+    display:flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 18px;
+}
+
+ul {
+    margin-left:15px;
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    padding: 13px 20px;
+    background-color: #b9b9b9;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* ← ここが影！ */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    transform: translateY(0); /* 初期状態 */
+}
+
+.btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    transform:scale(1.03)
+}
+
+.btn:active {
+    transform: translate(2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}

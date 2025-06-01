@@ -1,0 +1,63 @@
+@import url('destyle.css');
+
+header {
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Noto Serif JP', serif;
+    color: #392421;             /* ダークブラウン（知性・歴史感） */
+    background-color: #e2ddca;  /* パーチメントベージュ（古文書風） */
+}
+
+.total-result {
+    background-color: #e7e7e7;
+    margin: 15px;
+    border-radius: 6px;
+    padding:15px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.result {
+    background-color: #ffffff;
+    margin: 15px 6px;
+    border-radius: 6px;
+    padding:15px 8px;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+    margin:20px 0px 50px 0px;
+}
+
+.quiz {
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+.choices {
+    margin:4px 6px;
+}
+
+.kaitou {
+    margin-top: 15px;
+}
+
+.res {
+    margin-top:15px;
+}
+
+.correct {
+    color: red;
+}
+
+.correct_count {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 25px;
+    color:red;
+    font-weight: bold;
+}

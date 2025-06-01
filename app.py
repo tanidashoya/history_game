@@ -3,12 +3,12 @@
 from flask import Flask,render_template,url_for,request,session,redirect
 from random import choice
 from quiz_dict_list_data import quiz_dict_list
+import openai
+import os
 
 app = Flask(__name__)
-
 app.secret_key = "shoya_secret"
-correct_count = 0   #正答数カウント用リスト
-result = []  #結果保管用リスト
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 class Quiz:
     def __init__(self, num, quiz, choices, answer):
@@ -26,25 +26,32 @@ def before():
 # 最初に表示されるページ
 @app.route("/",methods=["GET","POST"])
 def index():
-    global correct_count
-    global result   
-    
+
     #sessionにroundがなくて、methodがGET(ページアクセス（見るだけ）)のときに実行
     if "round" not in session and request.method == "GET":
         session["round"] = 0        #一定回数POSTを受けたら抜けられるように回数を記録しておく用のsession
+        session["correct_count"] = 0   #正答数カウント用リスト
+        session["result"] = []  #結果保管用リスト
+        session["incorrect_result"] = [] #誤答した結果の辞書を格納するリスト
 
     #methodがデータ送信（何かを渡す・登録する）のときに実行
     if request.method == "POST":
         user_input = request.form.get("user_input")  #ユーザーの選択した値を受け取る
         quiz_dic = {"quiz": session["quiz"],"choices": session["choices"],"answer": session["answer"]}
+        result = session.get("result",[])
         result.append([quiz_dic, user_input, session["round"]+1])  #result = [クイズの内容、ユーザーの選択肢、問題数]
+        session["result"] = result #sessuinに再代入
         if user_input == quiz_dic["answer"]:
-            correct_count += 1
+            session["correct_count"] += 1
+        if user_input != quiz_dic["answer"]:
+            incorrect_result = session.get("incorrect_result",[])
+            incorrect_result.append([quiz_dic, user_input, session["round"]+1])
+            session["incorrect_result"] = incorrect_result
         session["round"] += 1       #一回目のポストでsession["round"] = 1になる
         return redirect(url_for("index"))     #新しくいれたコード
 
         
-    if session["round"] >= 20:
+    if session["round"] >= 3:
         return redirect("/finish")
     
    
@@ -63,20 +70,64 @@ def index():
 #採点結果URL
 @app.route("/finish",methods=["GET","POST"])
 def finish():
-    global result  #問題や解答の辞書、ユーザーの入力、問題番号が入ったリスト：[ [{},user_input,1], [{},user_input,2], ・・・]
-    global correct_count
+    #sessionをクリアするために一時変数に避難
+    rendered = render_template("finish.html", result=session.get("result",[]), correct_count=session.get("correct_count"))
+    incorrect_result = session["incorrect_result"]
+    last_round = session["round"]
+   
+    session.clear()
     
-    return render_template("finish.html", result = result, correct_count = correct_count)
+    # 避難したsessionを再代入およびHTMLに渡す
+    session["round"] = last_round
+    session["incorrect_result"] = incorrect_result
+    return rendered
 
 
 #誤答解説用URL
 @app.route("/explanation",methods=["GET","POST"])
 def explanation():
-    global result
-    
-    return render_template("explanation.html")
-
-
+    #session["incorrect_result"] = [クイズの内容(辞書型)、ユーザーの選択肢、問題数]
+    #クイズの内容{"quiz": session["quiz"],"choices": session["choices"],"answer": session["answer"]}
+    incorrect_result = session.get("incorrect_result", [])
+    session.clear()
+    #chatgptapiにクイズの内容を渡して答えの解答を出力させる
+    for res in incorrect_result:
+        quiz = res[0]["quiz"]
+        choices = res[0]["choices"]
+        answer = res[0]["answer"]
+        user_answer = res[1]
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+            {
+                "role": "system",
+                "content": (
+                    "あなたは一流の世界史の先生です。"
+                    f"{quiz}の内容の問題に{choices}の選択肢がユーザーに与えられており、問題の正解は{answer}でユーザーは{user_answer}と答えて間違えています。"
+                    "ユーザーの誤答を考慮しながら、クイズの内容より問題の解説を行ってください。"
+                    "解説和分かりやすく、簡潔に行ってください"
+                    )
+            },
+            {
+                "role": "user",
+                "content": (
+                    "あなたは渡されたクイズの内容、選択肢、正解、ユーザーの解答（誤答）から問題の解説を分かりやすく丁寧に簡潔に行ってください"
+                    "最初の相槌や最後の挨拶などはいりません。また、クイズ内容や選択肢の復唱もいりません"
+                    "クイズの解説を述べることに神経を集中させてください"
+                    "また前後の歴史的経緯も簡潔に述べてください"
+                    "始まりと締めのあいさつ文は必要ありません"
+                )
+            }
+        ],
+            temperature=1.0,
+            presence_penalty=1.0,
+            frequency_penalty=1.0,
+            max_completion_tokens=1800
+            
+            )
+        res.append(response.choices[0].message.content)
+        
+    return render_template("explanation.html",incorrect_result = incorrect_result)
 
 
 if __name__ == "__main__":
@@ -84,3 +135,10 @@ if __name__ == "__main__":
     
 
 """rd_quiz = choice(quiz_dict_list) おなじセッション内？では同じ問題が選ばれないようにしたい"""
+"""gloval変数を使っていると複数ユーザーがアクセスする際に高確率でバグが発生する
+→sessionに保存することで解決
+"""
+
+"""/finishに/explanationへのリンクのボタンを作成する（CSS装飾）"""
+"""/explanationのページを作成する"""
+"""chatgptのapiキーとsessionのキーをVPSの環境変数に設定できるようにする"""
