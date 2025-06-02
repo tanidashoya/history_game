@@ -50,34 +50,17 @@ main {
     margin-top:15px;
 }
 
-.correct {
-    color: red;
-}
-
-.correct_count {
-    margin-top: 40px;
+h3 {
+    margin-top:15px;
+    margin-bottom:10px;
+    font-size: 22px;
     text-align: center;
-    font-size: 25px;
     color:red;
     font-weight: bold;
 }
 
-.explanation-btn {
-    text-align: center;
-    margin-top:45px;
-}
-
-.button {
-    display: inline-block;
-    padding: 20px 30px;
-    background-color: #535353;
-    color:#ffffff;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 9999px;
-    font-family: "Courier New", Courier, monospace;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    transform: translateY(0); /* 初期状態 */
+.ai {
+    padding:15px;
+    border: #e2ddca solid 2px;
+    margin-bottom: 15px;
 }

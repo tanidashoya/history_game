@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AIによる誤答解説</title>
+    <link rel="stylesheet" href="../static/explanation.css">
 </head>
 <body>
-    {% for res in incorrect_result %}
-        <p>{{res[2]}}</p>
-        <p>{{res[3]}}</p>
-    {% endfor %}
+    <header>
+        <h1>AIによる誤答解説</h1>
+    </header>
+    <div class="total-result">
+        <ul>
+            {% for res in incorrect_result %}
+            <div class="result">
+                <li class="quiz">第{{res[2]}}問：{{res[0]["quiz"]}}</li>
+                {% for key,choice in res[0]["choices"].items() %}
+                    <li class="choices">{{key}}：{{choice}}</li>
+                {% endfor %}
+                <li class="kaitou">正解：{{res[0]["answer"]}}</li>
+                <li>あなたの解答：{{res[1]}}</li>
+                <h3>☆ AIによる解説 ☆</h3>
+                <li class="ai">{{res[3]}}</li>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

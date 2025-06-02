@@ -72,14 +72,16 @@ def index():
 def finish():
     #sessionをクリアするために一時変数に避難
     rendered = render_template("finish.html", result=session.get("result",[]), correct_count=session.get("correct_count"))
+    
     incorrect_result = session["incorrect_result"]
     last_round = session["round"]
    
     session.clear()
     
-    # 避難したsessionを再代入およびHTMLに渡す
-    session["round"] = last_round
-    session["incorrect_result"] = incorrect_result
+    if incorrect_result:  #incorrect_resultに値が存在している場合のみsessionに戻す　　　新追加
+        # 避難したsessionを再代入およびHTMLに渡す
+        session["round"] = last_round
+        session["incorrect_result"] = incorrect_result
     return rendered
 
 
@@ -97,7 +99,7 @@ def explanation():
         answer = res[0]["answer"]
         user_answer = res[1]
         response = openai.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[
             {
                 "role": "system",
@@ -139,6 +141,7 @@ if __name__ == "__main__":
 →sessionに保存することで解決
 """
 
-"""/finishに/explanationへのリンクのボタンを作成する（CSS装飾）"""
-"""/explanationのページを作成する"""
+"""問題数を増やす中級・上級問題も作成する"""
+"""記述問題もつくる？"""
+"""問題をもう一度解くようなボタンを/finishにつくる"""
 """chatgptのapiキーとsessionのキーをVPSの環境変数に設定できるようにする"""
