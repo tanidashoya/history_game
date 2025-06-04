@@ -62,16 +62,17 @@ main {
     font-weight: bold;
 }
 
-.explanation-btn {
-    text-align: center;
+.btn-group {
+    display:flex;
+    gap:40px;
     margin-top:45px;
+    justify-content: center;
 }
+
 
 .button {
     display: inline-block;
     padding: 20px 30px;
-    background-color: #535353;
-    color:#ffffff;
     font-size: 20px;
     font-weight: bold;
     border-radius: 9999px;
@@ -80,4 +81,15 @@ main {
     cursor: pointer;
     transition: all 0.3s ease;
     transform: translateY(0); /* 初期状態 */
+}
+
+.btn1 {
+    color:#ffffff;
+    background-color: rgb(45, 45, 255);
+}
+
+
+.btn2 {
+    color:#ffffff;
+    background-color: rgb(255, 31, 31);
 }

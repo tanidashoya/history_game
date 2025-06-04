@@ -64,3 +64,23 @@ h3 {
     border: #e2ddca solid 2px;
     margin-bottom: 15px;
 }
+
+.home-btn {
+    text-align: center;
+    margin:45px 0px;
+}
+
+.button {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color:red;
+    color:#ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 9999px;
+    font-family: "Courier New", Courier, monospace;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(0); /* 初期状態 */
+}

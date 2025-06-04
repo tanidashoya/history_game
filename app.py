@@ -51,7 +51,7 @@ def index():
         return redirect(url_for("index"))     #新しくいれたコード
 
         
-    if session["round"] >= 3:
+    if session["round"] >= 15:
         return redirect("/finish")
     
    
@@ -131,6 +131,12 @@ def explanation():
         
     return render_template("explanation.html",incorrect_result = incorrect_result)
 
+@app.route("/start",methods=["GET","POST"])
+def start():
+    session.clear()
+    return redirect(url_for("index"))
+    
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
@@ -138,10 +144,8 @@ if __name__ == "__main__":
 
 """rd_quiz = choice(quiz_dict_list) おなじセッション内？では同じ問題が選ばれないようにしたい"""
 """gloval変数を使っていると複数ユーザーがアクセスする際に高確率でバグが発生する
-→sessionに保存することで解決
-"""
+→sessionに保存することで解決"""""
 
-"""問題数を増やす中級・上級問題も作成する"""
+"""問題数を増やす中級・上級問題も作成する(出題ページを分ける)"""
 """記述問題もつくる？"""
-"""問題をもう一度解くようなボタンを/finishにつくる"""
 """chatgptのapiキーとsessionのキーをVPSの環境変数に設定できるようにする"""

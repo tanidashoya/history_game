@@ -36,8 +36,13 @@
             <p>正解数：{{correct_count}}問 / 全{{result|length}}問中</p>
         </div>
         <!-- 誤答説明用ページに遷移するボタンを作成する -->
-        <div class="explanation-btn">
-            <a class="button" href="{{ url_for('explanation') }}">AIによる誤答解説</a>
+        <div class="btn-group">
+            <div class="explanation-btn">
+                <a class="button btn1" href="{{ url_for('explanation') }}">AIによる誤答解説</a>
+            </div>
+            <div class="home-btn">
+                <a class="button btn2" href="{{ url_for('start') }}">再挑戦！</a>
+            </div>
         </div>
         <p class=""></p>
     </main>
