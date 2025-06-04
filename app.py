@@ -98,7 +98,7 @@ def explanation():
         choices = res[0]["choices"]
         answer = res[0]["answer"]
         user_answer = res[1]
-        response = openai.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
             {
@@ -107,7 +107,7 @@ def explanation():
                     "あなたは一流の世界史の先生です。"
                     f"{quiz}の内容の問題に{choices}の選択肢がユーザーに与えられており、問題の正解は{answer}でユーザーは{user_answer}と答えて間違えています。"
                     "ユーザーの誤答を考慮しながら、クイズの内容より問題の解説を行ってください。"
-                    "解説和分かりやすく、簡潔に行ってください"
+                    "解説を分かりやすく、簡潔に行ってください"
                     )
             },
             {
