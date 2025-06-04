@@ -124,7 +124,7 @@ def explanation():
             temperature=1.0,
             presence_penalty=1.0,
             frequency_penalty=1.0,
-            max_completion_tokens=1800
+            max_tokens=1800
             
             )
         res.append(response.choices[0].message.content)
