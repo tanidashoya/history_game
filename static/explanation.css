@@ -1,7 +1,7 @@
 @import url('destyle.css');
 
 header {
-    padding: 7px;
+    padding: 15px;
     font-size: 18px;
     text-align: center;
     font-weight: bold;
@@ -14,15 +14,15 @@ header {
     background-color: #e7e7e7;
     margin: 15px;
     border-radius: 6px;
-    padding:8px 3px;
+    padding:6px 2px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .result {
     background-color: #ffffff;
-    margin: 15px 6px;
+    margin: 25px 6px;
     border-radius: 6px;
-    padding:15px 8px;
+    padding:10px 4px;
 }
 
 ul {
@@ -51,7 +51,7 @@ main {
 }
 
 h3 {
-    margin-top:15px;
+    margin-top:20px;
     margin-bottom:10px;
     font-size: 22px;
     text-align: center;
@@ -60,7 +60,7 @@ h3 {
 }
 
 .ai {
-    padding:10px;
+    padding:15px;
     border: #e2ddca solid 2px;
     margin-bottom: 10px;
 }
