@@ -64,6 +64,17 @@ main {
     padding:25px 30px;
 }
 
+.attention {
+    font-size: 14px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.attention2 {
+    font-size: 14px;
+    padding-left: 15px;
+}
+
 @media(max-width:768px) {
     .home-image{
         display: inline-block;
@@ -74,8 +85,8 @@ main {
         display:flex;
         gap:45px;
         justify-content: center;
-        margin-top: 30px;
-        margin-bottom: 60px;
+        margin-top: 20px;
+        margin-bottom: 45px;
     }
     .btn {
         border:2px solid gray;
