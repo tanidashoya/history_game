@@ -79,11 +79,11 @@ main {
     .home-image{
         display: inline-block;
         width:90%;
-        margin:40px 0px;
+        margin:25px 0px;
     }
     .btn-group {
         display:flex;
-        gap:45px;
+        gap:40px;
         justify-content: center;
         margin-top: 20px;
         margin-bottom: 45px;
