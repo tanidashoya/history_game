@@ -67,6 +67,7 @@ main {
     gap:40px;
     margin-top:45px;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 
@@ -92,4 +93,20 @@ main {
 .btn2 {
     color:#ffffff;
     background-color: rgb(255, 31, 31);
+}
+
+.attention {
+    padding-left: 15px;
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+
+@media (max-width:768px) {
+    .btn-group {
+        gap: 20px;
+    }
+    .button {
+        font-size: 16px;
+        padding: 15px 15px;
+    }
 }
