@@ -6,8 +6,9 @@ from quiz_dict_list_data import quiz_dict_list
 import openai
 import os
 
+
 app = Flask(__name__)
-app.secret_key = "shoya_secret"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 class Quiz:
