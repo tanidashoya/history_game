@@ -104,7 +104,7 @@ def explanation():
         answer = res[0]["answer"]
         user_answer = res[1]
         response = openai.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-nano",
             messages=[
             {
                 "role": "system",
@@ -132,7 +132,7 @@ def explanation():
             temperature=0.8,
             # presence_penalty=1.0,
             # frequency_penalty=1.0,
-            max_tokens=350,
+            max_tokens=450,
             timeout=30
             )
         res.append(response.choices[0].message.content)
