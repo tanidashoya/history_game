@@ -115,6 +115,7 @@ def explanation():
                     "ユーザーは間違えていますが、誤答内容を参考に、どこで間違えたのかにも言及すると良いです。"
                     "前後の歴史的背景にも軽く触れてください。"
                     "※注意：あいさつや選択肢の復唱は不要です。解説に集中してください。"
+                    "解説は途中で切れず必ず終わらせてください"
                     )
             },
             {
@@ -128,11 +129,11 @@ def explanation():
                 )
             }
         ],
-            # temperature=1.0,
+            temperature=0.8,
             # presence_penalty=1.0,
             # frequency_penalty=1.0,
-            max_tokens=2000
-            
+            max_tokens=350,
+            timeout=30
             )
         res.append(response.choices[0].message.content)
         
