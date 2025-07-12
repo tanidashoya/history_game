@@ -10,6 +10,22 @@ header {
     background-color: #e2ddca;  /* パーチメントベージュ（古文書風） */
 }
 
+.error-message {
+    background-color: #ffebee;
+    border: 2px solid #f44336;
+    border-radius: 6px;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+.error-message p {
+    color: #d32f2f;
+    font-weight: bold;
+    margin: 0;
+    font-size: 16px;
+}
+
 .total-result {
     background-color: #e7e7e7;
     margin: 15px;

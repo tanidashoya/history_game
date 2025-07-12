@@ -10,6 +10,13 @@
     <header>
         <h1>AIによる誤答解説</h1>
     </header>
+    
+    {% if error %}
+    <div class="error-message">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+    
     <div class="total-result">
         <ul>
             {% for res in incorrect_result %}
